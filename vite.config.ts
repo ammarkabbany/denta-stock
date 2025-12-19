@@ -26,13 +26,13 @@ const config = defineConfig({
     viteReact(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon/**/*'],
+      includeAssets: ['favicon/**/*', 'manifest.json'],
       manifest: false, // Use existing manifest.json
       devOptions: {
         enabled: false, // Disable service worker in dev to avoid caching issues
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,json}'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

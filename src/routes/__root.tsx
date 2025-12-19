@@ -29,6 +29,18 @@ if (import.meta.env.VITE_INSTRUMENTATION_SCRIPT_SRC) {
   })
 }
 
+if (import.meta.env.PROD) {
+  scripts.push({
+    children: `
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    `,
+  })
+}
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   loader: async () => {
     const { currentUser } = await authMiddleware()
