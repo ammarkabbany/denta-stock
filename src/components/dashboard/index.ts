@@ -1,0 +1,5 @@
+export { StatCard } from './stat-card'
+export { LowStockAlert } from './low-stock-alert'
+export { RecentMovements } from './recent-movements'
+export { QuickActions } from './quick-actions'
+export { DashboardPage } from './dashboard-page'

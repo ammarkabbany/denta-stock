@@ -1,0 +1,142 @@
+/* Logo reveal: entry with clarity, exit with punch */
+@keyframes logo-entry {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+    filter: blur(6px) saturate(120%);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+.animate-logo-entry {
+  animation: logo-entry 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes logo-exit {
+  0% {
+    transform: scale(1);
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(1.12);
+    filter: saturate(115%) brightness(1.05);
+  }
+}
+.animate-logo-exit {
+  animation: logo-exit 260ms ease-out both;
+}
+
+/* Shine sweep */
+.logo-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.95) 42%,
+    rgba(255, 255, 255, 0) 64%
+  );
+  mix-blend-mode: screen;
+  transform: translateX(-120%);
+  opacity: 0;
+  border-radius: 12px;
+}
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+.animate-shine {
+  animation: shine-sweep 800ms ease-out 0ms both;
+}
+
+/* Static linear highlight behind logo */
+.logo-linear {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 12px;
+  opacity: 0.4;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Bloom glow on exit (clipped to logo bounds) */
+.logo-bloom {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 12px;
+  opacity: 0;
+}
+@keyframes bloom {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.16;
+  }
+}
+.animate-bloom {
+  animation: bloom 260ms ease-out both;
+  background: radial-gradient(
+    closest-side,
+    rgba(32, 120, 240, 0.2),
+    rgba(32, 120, 240, 0) 70%
+  );
+  filter: blur(8px);
+}
+
+/* Subtle progress bar */
+.progress {
+  width: 160px;
+  height: 4px;
+  border-radius: 9999px;
+  background: #fff;
+  overflow: hidden;
+}
+.progress .bar {
+  width: 48px;
+  height: 100%;
+  background: linear-gradient(30deg, #0d9488, #3bf676);
+  transform: translateX(0px);
+  animation: progress-traverse 1300ms cubic-bezier(0.4, 0, 0.2, 1) infinite
+    alternate;
+}
+@keyframes progress-traverse {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(112px);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-logo-entry,
+  .animate-logo-exit,
+  .progress .bar,
+  .logo-shine,
+  .logo-bloom {
+    animation: none !important;
+  }
+}
